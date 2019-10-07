@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./rename.css">
+    <title>Document</title>
+</head>
+<body >
+  <header>
+    <% include html/nav.html%>
+  </header>
+<br>
+
+  <div class="contenetor-div">
+    <h1 style="text-align: center">Ingrese palabra para registrar</h1>
+    <br>
+      <div class="analizar">
+        <input type="text" id="respuesta"  required placeholder="Ingrese el texto" > <br>
+        <br>
+        <button class="button " id="postButton" >analizar palabra</button>
+      
+        <button class="button " id="getButton" >Obtener palabra</button>
+
+      </div>
+        
+    <br>
+    <table id="historial" >
+        <thead>
+            <tr>
+                <th>Palabra ingresada</th>
+                <th> tipo token</th>
+                </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+   
+  </div>
+ 
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="cliente.js"></script>
+       
+</body>
+</html>
