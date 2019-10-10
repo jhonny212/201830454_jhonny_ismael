@@ -23,6 +23,10 @@ router.get('/leer', (req, res) => {
     res.render('./leer.ejs', { max: 15 });
     
 });
+router.get('/Perfil', (req, res) => {
+    res.render('./Perfil.ejs', { max: 15 });
+    
+});
 
 
 
