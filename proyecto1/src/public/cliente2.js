@@ -1,18 +1,22 @@
 
+// obtener el identificador en constantes y var
 const getButton = document.querySelector("#getButton");
 const postButton = document.querySelector("#postButton");
-
-const url = "http://localhost:3000/users";
-const urlp = "http://localhost:3000/pusers";
-
 var datos=document.getElementById("historial");
 var datos2=document.getElementById("div2");
 
+// rutas para Get y Post
+const url = "http://localhost:3000/users";
+const urlp = "http://localhost:3000/pusers";
 
+
+
+// obtener input del form (file)
     var input = myForm.myInput;
-    console.log(input);
+ 
+// variable para leer el file    
     var reader = new FileReader;
-    
+   // eventos al input 
     input.addEventListener('change', onChange);
     
 
@@ -29,42 +33,67 @@ function onChange(event) {
   var array=[];
   
   function onLoad() {
-    var result = reader.result; // Obtienes el texto
-    // En tu ejemplo lo obtienes de una petición HTTP
     
+    var tmpo=[];
+    var result = reader.result; 
+
     var lineas = result.split('\n');
     for(var linea of lineas) {
-      console.log('[linea]', linea)
-      if(linea!=''){
-        array.push(linea);
-       ; 
+     if(linea!=''){
+// almacenar cada linea leida en un array
+        tmpo.push(linea);
+// imprimir el texto en el html
       datos2.innerHTML=datos2.innerHTML+linea+"<br>"
-
       }
     }
-    //document.write(array);
-
-    console.log(array.length+"aca");
    
-    
-  //  document.write(array[0]);
-    
+// leer el array de las lineas    
+   for (let index = 0; index < tmpo.length; index++) {
+     // separar cada linea en palabras
+     var temporal=tmpo[index].split(' ');
+     for (let i = 0; i < temporal.length; i++) {
+
+ try {
+    // Eliminar cadenas vacias
+        var numero=temporal[i].length;
+       
+        if(numero==0){
+     
+        }else{
+        
+          // agragar cadena final al array final
+          array.push(temporal[i]);
+        }
+      
+        
+      } catch (error) {
+        
+      }
+      
+       
+       
+     }
+   }
+ 
+ 
   }
+  
   var count=0;
   var tmp;
+  // envio de datos al servidor por cada solicitud
   const sendData = () => {
   
   
     if(count<array.length){
     tmp=array[count];
-    console.log(tmp);
+  //  console.log(tmp);
 }
     
     else {
 
         tmp='vacio';
     }
-
+// enviar palabra al servido con ruta /postusers
     axios.post('http://localhost:3000/postusers', {
             firstName: 'jhonny',
             lastName: 'garcia',
@@ -85,20 +114,23 @@ function onChange(event) {
     };
 
 
+    // obtener token de la letra enviada 
     const getData = () => {
         axios.get(url).then(response => {
-          console.log('obteniendo data');
+    
     if(tmp!='vacio'){
+      // agregar en tabla para los tokens
     var htmlTexto="<tr>"+"<td>"+tmp+"</td>" +"<td style="+"color:gray"+">"+response.data.carne+"</td><td>"+count+"</td></tr>";
          datos.innerHTML=datos.innerHTML+htmlTexto;
 
-                console.log(response.data.carne);}
+              }
             })
             .catch(error => {
                 console.log(error);
             });
     };
   
+    // agregar eventos a las constantes de id, enviandolo a su respectivo metodo
   postButton.addEventListener('click', sendData);
 
 getButton.addEventListener('click', getData);

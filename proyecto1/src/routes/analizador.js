@@ -9,14 +9,16 @@ let tipo;
 
 var arrayObjeto=[];
 
-
+// ruta que recibe la letra
 router.post('/postusers', (req, res) => {
    
 console.log(arrayObjeto[0]);
 
     bolean=true;
     tipo="ERROR";
+    // obtener palabra que se envio del cliente
 const palabra= req.body.text;
+// funcion
 automata(palabra);
 
 res.status(200).send('wrong');
@@ -37,7 +39,7 @@ function automata(textoA){
         // switch de movimientos de estados
         switch (detectarPalabra(aux[count])) {
             case 'OP':
-                //verificar estados
+                
                 if(arrayEstador[count]=='A'){
                    
                     arrayEstador.push('B');
@@ -118,6 +120,7 @@ function automata(textoA){
         }
       count++;
     }
+
     //almacenar estado final
     var varTmp=arrayEstador[aux.length];
     // verificar
@@ -148,7 +151,6 @@ function automata(textoA){
             objeto.palabra=textoA;
             objeto.tipo=tipo;
             arrayObjeto.push(objeto);
-            console.log(arrayObjeto[0].palabra);
             
              break;
          }
@@ -159,7 +161,7 @@ function automata(textoA){
     }
 
 }
-// funcion para obtener el movimiento
+// funcion para obtener la expresion con que se movera en el automata
 function detectarPalabra(textoTxt) {
     // Globales
     const array= ['+', '-', '*', '/', '%', '=','==','<','>','>=','<='];
@@ -247,25 +249,26 @@ return tipoLetra;
 
 
 
-
+// metodo para obtener el token
 router.get('/users', (req, res) => {
 
     setTimeout(() => {
         res.status(200).json({
             usurio: 'Jhonny',
-            
+            // envio del token
             carne: tipo
         });
     }, 500);
 
 });
 
+// metodo para el reporte final
 router.get('/users2', (req, res) => {
   
     setTimeout(() => {
         res.status(200).json({
             usurio: 'Jhonny',
-            
+            // enviar un objeto con atributos del tipo y letra
             obj: arrayObjeto
         });
     }, 500);
