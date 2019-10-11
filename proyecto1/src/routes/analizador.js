@@ -142,9 +142,24 @@ function automata(textoA){
                 tipo='Flotante';
             }else if(varTmp=='J' || varTmp=='O' ||varTmp=='M' )
             {
-                if(textoA=='VERDADERO' || textoA=='FALSO')
-                tipo='Booleano';
-                else tipo='Identificador';
+                if(textoA=='VERDADERO' || textoA=='FALSO'){
+                tipo='Booleano';}
+                else {
+                    if (textoA=='variable' || textoA=='entero' || textoA=='decimal' ||
+                    textoA=='booleano' || textoA=='cadena' || textoA=='si' ||
+                    textoA=='sino' || textoA=='mientras' || textoA=='hacer' 
+                    ) {
+                        tipo='Palabra reservada';
+                        
+                    } else {
+                        tipo='Identificador'; 
+                    }
+                    
+                
+                }
+
+
+
             }
 
             var objeto=new Object();
