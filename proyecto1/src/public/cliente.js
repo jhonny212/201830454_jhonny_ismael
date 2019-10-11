@@ -16,7 +16,7 @@ const getData = () => {
     axios.get(url).then(response => {
       console.log('obteniendo data');
 
-var htmlTexto="<tr>"+"<td>"+respuesta.value+"</td>" +"<td style="+"color:gray"+">"+response.data.carne+"</td>"+"</tr>";
+var htmlTexto="<tr>"+"<td>"+respuesta.value+"</td>" +"<td style="+"color:gray"+">"+response.data.kind+"</td>"+"</tr>";
       datos.innerHTML=datos.innerHTML+htmlTexto;
             console.log(response.data.carne);
         })

@@ -271,7 +271,7 @@ router.get('/users', (req, res) => {
         res.status(200).json({
             usurio: 'Jhonny',
             // envio del token
-            carne: tipo
+            kind: tipo
         });
     }, 500);
 

@@ -120,7 +120,7 @@ function onChange(event) {
     
     if(tmp!='vacio'){
       // agregar en tabla para los tokens
-    var htmlTexto="<tr>"+"<td>"+tmp+"</td>" +"<td style="+"color:gray"+">"+response.data.carne+"</td><td>"+count+"</td></tr>";
+    var htmlTexto="<tr>"+"<td>"+tmp+"</td>" +"<td style="+"color:gray"+">"+response.data.kind+"</td><td>"+count+"</td></tr>";
          datos.innerHTML=datos.innerHTML+htmlTexto;
 
               }

@@ -27,6 +27,10 @@ router.get('/Perfil', (req, res) => {
     res.render('./Perfil.ejs', { max: 15 });
     
 });
+router.get('/automata', (req, res) => {
+    res.render('./automata.ejs', { max: 15 });
+    
+});
 
 
 

@@ -1,5 +1,5 @@
 body{
-	background: rgb(195, 195, 216);
+	background: rgb(168, 168, 180);
 	margin: 0;
 	padding: 0;
 }
@@ -52,4 +52,25 @@ th{
 	width: 400px;
 
 	margin: auto;
+}
+
+.perfil{
+	width: 80%;
+	margin-left: 100px;
+	background: rgb(13, 13, 14);
+	color: white;
+	border: 1px solid;
+	margin-top: 100px;
+	padding: 40px 40px;
+	transition: 4s;
+}
+.perfil:hover{
+	background: white;
+	color: black;
+
+	transition: 2.8s;
+	background-image: url("img/usac.jpg") ;
+	background-repeat: no-repeat;
+	background-size: 80% 300px;
+	
 }

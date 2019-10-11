@@ -3,6 +3,11 @@
     margin: auto;
  
 }
+body{
+	background: rgb(168, 168, 180);
+	margin: 0;
+	padding: 0;
+}
 .cargar-archivo input {
     
     margin-left: 40%;
