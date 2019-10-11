@@ -9,27 +9,26 @@ let tipo;
 
 var arrayObjeto=[];
 
-// ruta que recibe la letra
+// ruta que recibe la letra desde el cliente
 router.post('/postusers', (req, res) => {
    
-console.log(arrayObjeto[0]);
 
     bolean=true;
     tipo="ERROR";
     // obtener palabra que se envio del cliente
 const palabra= req.body.text;
-// funcion
+// funcion automata
 automata(palabra);
 
 res.status(200).send('wrong');
 });
 // automata
 function automata(textoA){
-    // letra obtenida
+    // letra obtenida a array
     var aux=textoA.split("");
     //contador
     var count=0;
-    //array de estador
+    //array de estado inicialisado en A
     var arrayEstador=[];
     arrayEstador.push('A');
     
@@ -121,9 +120,10 @@ function automata(textoA){
       count++;
     }
 
-    //almacenar estado final
+    //almacenar estado final que ha sido recorrido
     var varTmp=arrayEstador[aux.length];
-    // verificar
+
+    // verificar equivvalencia de estado
     if(arrayEstador.length=aux.length){
 //estados de aceptacion
         const aceptacion=['B','C','D','G','L','J','O','M'];
@@ -142,6 +142,7 @@ function automata(textoA){
                 tipo='Flotante';
             }else if(varTmp=='J' || varTmp=='O' ||varTmp=='M' )
             {
+                // si es identificador, verificar si es una palabra reservada
                 if(textoA=='VERDADERO' || textoA=='FALSO'){
                 tipo='Booleano';}
                 else {
@@ -161,10 +162,11 @@ function automata(textoA){
 
 
             }
-
+            // objeto con atributos de palabra y el tipo
             var objeto=new Object();
             objeto.palabra=textoA;
             objeto.tipo=tipo;
+            // array con todos los objetos
             arrayObjeto.push(objeto);
             
              break;
