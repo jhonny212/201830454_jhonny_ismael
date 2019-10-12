@@ -94,12 +94,15 @@ function onChange(event) {
         tmp='vacio';
     }
 // enviar palabra al servido con ruta /postusers
+if(tmp!='vacio'){
+  console.log(tmp);
     axios.post('http://localhost:3000/postusers', {
             firstName: 'jhonny',
             lastName: 'garcia',
             
-            text: tmp
-           
+            text: tmp,
+            t:'GG'
+          
 
         }, {
             'Content-Type': 'application/json'
@@ -111,7 +114,7 @@ function onChange(event) {
             console.log(error);
         }); 
         count++;
-    };
+    };}
 
 
     // obtener token de la letra enviada 

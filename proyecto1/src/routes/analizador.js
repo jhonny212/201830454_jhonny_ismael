@@ -20,12 +20,12 @@ router.post('/postusers', (req, res) => {
 const palabra= req.body.text;
 // funcion automata
 //automata(palabra);
-FuncionAutomata(palabra);
+FuncionAutomata(palabra,req.body.t);
 
 res.status(200).send('wrong');
 });
 // automata
-function FuncionAutomata(textoA){
+function FuncionAutomata(textoA,t){
 arrayTipo=[];
 
 
@@ -138,7 +138,10 @@ for (let index = 0; index < letraTemporal.length; index++) {
               
                 estadoAnterio=Matriz[i][j][1];
                  tipo=Matriz[i][j][2];
-               
+               if(t=='GG'){
+                arrayTipo.push(tipo);
+              
+               }
                 
                 validador=false;
                 columna=j;
