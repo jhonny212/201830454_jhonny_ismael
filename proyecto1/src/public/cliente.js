@@ -13,6 +13,12 @@ var datos=document.getElementById("historial");
 
 
 // metodo para obtener el token
+var array;
+for (let index = 0; index <respuesta.length; index++) {
+    
+    
+}
+
 const getData = () => {
     axios.get(url).then(response => {
      

@@ -27,6 +27,9 @@ res.status(200).send('wrong');
 // automata
 function FuncionAutomata(textoA){
 
+var arrayTotal;
+arrayTotal+=textoA.split('/');
+arrayTotal+=textoA.split('(');
 
 var Matriz = new Object ();
 Matriz=[];
@@ -35,7 +38,6 @@ for(var i=0; i<8; i++) {
  Matriz[i] = new Array(6);
 } 
 
-Matriz[2][2]=['hola','h'];
 
 // movimiento, estado, valor, estado ant
 Matriz[0][0]=['Operador','B','Operador','A'];
@@ -52,6 +54,8 @@ Matriz[7][5]=['Letra','F','Identificador','F'];
 
 var letraTemporal=textoA.split('');
 var contador=0;
+var fila;
+var columna;
 let validador=true;
 let validador2=true;
 var estadoAnterio;
@@ -73,15 +77,16 @@ for (let index = 0; index < letraTemporal.length; index++) {
                
                 if(letratmt==Matriz[i][j][0] && validador)
          {
-         contador++;
+        
           if(Matriz[i][j][3]==estadoAnterio){
             estadoAnterio=Matriz[i][j][1];
              tipo=Matriz[i][j][2];
             validador=false;
+            contador++;
+         
             }
           
          }
-
 
             } catch (error) {
                 
@@ -94,8 +99,9 @@ for (let index = 0; index < letraTemporal.length; index++) {
 
 
 }
-if(tipo=='Identificador'){
+if(tipo=='Identificador' ){
 //
+
 if(textoA=='VERDADERO' || textoA=='FALSO'){
     tipo='Booleano';}
     else {
@@ -105,7 +111,11 @@ if(textoA=='VERDADERO' || textoA=='FALSO'){
         ) {
             tipo='Palabra reservada';
             
-        }}}
+        }}
+    }
+    if(!(contador==letraTemporal.length)){
+        tipo='Error';
+    }
 //
 
 var objeto=new Object();
