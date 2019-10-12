@@ -139,6 +139,7 @@ for (let index = 0; index < letraTemporal.length; index++) {
                 estadoAnterio=Matriz[i][j][1];
                  tipo=Matriz[i][j][2];
                
+                
                 validador=false;
                 columna=j;
                 contador++;
@@ -225,10 +226,6 @@ if(textoA=='VERDADERO' || textoA=='FALSO'){
             
         }}
     }
-    /*if(!(contador==letraTemporal.length)){
-        tipo='Error';
-    }*/
-//
 
 
 

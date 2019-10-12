@@ -115,15 +115,25 @@ function onChange(event) {
 
 
     // obtener token de la letra enviada 
+    var Count=0;
     const getData = () => {
         axios.get(url).then(response => {
     
-    if(tmp!='vacio'){
+ 
       // agregar en tabla para los tokens
-    var htmlTexto="<tr>"+"<td>"+tmp+"</td>" +"<td style="+"color:gray"+">"+response.data.kind+"</td><td>"+count+"</td></tr>";
-         datos.innerHTML=datos.innerHTML+htmlTexto;
-
-              }
+   
+      Count++;
+  
+         //
+       
+        
+          for (let index = 0; index <response.data.kind.length; index++) {
+            console.log(response.data.kind[index]);
+            var htmlTexto="<tr>"+"<td>"+tmp+"</td>" +"<td style="+"color:gray"+">"+response.data.kind[index]+"</td><td>"+count+"</td></tr>";
+            datos.innerHTML=datos.innerHTML+htmlTexto;
+           
+            
+          }
             })
             .catch(error => {
                 console.log(error);
