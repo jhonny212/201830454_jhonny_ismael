@@ -28,7 +28,7 @@ function llenarReporte() {
 arrayReporte.sort((unaCadena, otraCadena) => otraCadena.tipo.localeCompare(unaCadena.tipo)); 
 for (let index = 0; index < arrayReporte.length; index++) {
    
-    datos.innerHTML=datos.innerHTML+"<tr><td>"+arrayReporte[index].palabra+"</td><td>"+arrayReporte[index].tipo+"</td></tr>";
+    datos.innerHTML=datos.innerHTML+"<tr><td>"+arrayReporte[index].palabra+"</td><td>"+arrayReporte[index].tipo+"</td><td>"+arrayReporte[index].col+"</td></tr>";
     
 }
 

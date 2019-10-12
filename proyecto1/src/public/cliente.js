@@ -18,12 +18,15 @@ for (let index = 0; index <respuesta.length; index++) {
     
     
 }
-
+var count=0;
 const getData = () => {
     axios.get(url).then(response => {
-     
-var htmlTexto="<tr>"+"<td>"+respuesta.value+"</td>" +"<td style="+"color:gray"+">"+response.data.kind+"</td>"+"</tr>";
+     console.log(response.data.kind.length);
+        if(count<response.data.kind.length){
+    var htmlTexto="<tr>"+"<td>"+respuesta.value+"</td>" +"<td style="+"color:gray"+">"+response.data.kind[count]+"</td>"+"</tr>";
       datos.innerHTML=datos.innerHTML+htmlTexto;
+    count++;
+}
             console.log(response.data.carne);
         })
         .catch(error => {
@@ -35,8 +38,8 @@ var htmlTexto="<tr>"+"<td>"+respuesta.value+"</td>" +"<td style="+"color:gray"+"
 // metodo para enviar letra del input hacia el servidos
 const sendData = () => {
     axios.post('http://localhost:3000/postusers', {
-            firstName: 'Oliver hola',
-            lastName: 'sierra',
+            firstName: 'Jhonyy',
+            lastName: 'Garcia',
             text: respuesta.value
         }, {
             'Content-Type': 'application/json'
