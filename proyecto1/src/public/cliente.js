@@ -3,7 +3,7 @@ console.log('hola mundo ');
 const getButton = document.querySelector("#getButton");
 const postButton = document.querySelector("#postButton");
 
-const respuesta = document.querySelector('#respuesta');
+var respuesta = document.querySelector('#respuesta');
 
 // rutas para Get y Post
 const url = "http://localhost:3000/users";

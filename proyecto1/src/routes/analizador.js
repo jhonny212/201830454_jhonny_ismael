@@ -5,6 +5,7 @@ const path = require('path');
 // variables
 let bolean=true;  
 let tipo;
+
 // analizar palabra
 
 var arrayObjeto=[];
@@ -14,244 +15,186 @@ router.post('/postusers', (req, res) => {
    
 
     bolean=true;
-    tipo="ERROR";
+  //  tipo="ERROR";
     // obtener palabra que se envio del cliente
 const palabra= req.body.text;
 // funcion automata
-automata(palabra);
+//automata(palabra);
+FuncionAutomata(palabra);
 
 res.status(200).send('wrong');
 });
 // automata
-function automata(textoA){
-    // letra obtenida a array
-    var aux=textoA.split("");
-    //contador
-    var count=0;
-    //array de estado inicialisado en A
-    var arrayEstador=[];
-    arrayEstador.push('A');
+function FuncionAutomata(textoA){
+
+
+var Matriz = new Object ();
+Matriz=[];
+
+for(var i=0; i<8; i++) {
+ Matriz[i] = new Array(6);
+} 
+
+Matriz[2][2]=['hola','h'];
+
+// movimiento, estado, valor, estado ant
+Matriz[0][0]=['Operador','B','Operador','A'];
+Matriz[0][1]=['Signo','C','Signo','A'];
+Matriz[0][2]=['Agrupacion','D','Agrupacion','A'];
+Matriz[0][4]=['Digito','G','Numero','A'];
+Matriz[0][5]=['Letra','F','Identificador','A'];
+Matriz[4][3]=['Punto','H','Error','G'];
+Matriz[4][4]=['Digito','G','Numero','G'];
+Matriz[5][4]=['Digito','L','Flotante','H'];
+Matriz[6][4]=['Digito','L','Flotante','L'];
+Matriz[7][4]=['Digito','F','Identificador','F'];
+Matriz[7][5]=['Letra','F','Identificador','F'];
+
+var letraTemporal=textoA.split('');
+var contador=0;
+let validador=true;
+let validador2=true;
+var estadoAnterio;
+estadoAnterio="";
+estadoAnterio="A";
+tipo="";
+if (validador2) {
     
 
-    while(count<aux.length){
-
-        // switch de movimientos de estados
-        switch (detectarPalabra(aux[count])) {
-            case 'OP':
-                
-                if(arrayEstador[count]=='A'){
-                   
-                    arrayEstador.push('B');
-                }
-              
-            break;
-
-            case 'SIG':
-                    if(arrayEstador[count]=='A'){
-                   
-                        arrayEstador.push('C');
-                    }
-            break;
-
-            case 'AG': 
-            if(arrayEstador[count]=='A'){
-                arrayEstador.push('D');
-            }
-
-                break;
-
-            case 'DIG':
-                    if(arrayEstador[count]=='G' ||arrayEstador[count]=='A'  ){
-                        arrayEstador.push('G');
-                    }
-                    if(arrayEstador[count]=='H' ){
-                        arrayEstador.push('L');
-                    }
-                    if(arrayEstador[count]=='L' ){
-                        arrayEstador.push('L');
-                    }
-                    if(arrayEstador[count]=='F' ){
-                        arrayEstador.push('I');
-                    }
-                    if(arrayEstador[count]=='I' ){
-                        arrayEstador.push('M');
-                    }
-                    if(arrayEstador[count]=='M' ){
-                        arrayEstador.push('M');
-                    }
-                   
-                    
-                break;
-
-             case 'P':
-                    if(arrayEstador[count]=='G' ){
-                        arrayEstador.push('H');
-                    }
-                break; 
-
-                case 'CERO':
-                        if(arrayEstador[count]=='F' ){
-                            arrayEstador.push('J');
-                        }
-                        if(arrayEstador[count]=='J' ){
-                            arrayEstador.push('M');
-                        }
-                    break; 
-              
-
-            case 'LE':
-                    if(arrayEstador[count]=='A'  ){
-                        arrayEstador.push('F');
-                    }
-                    if(arrayEstador[count]=='F'  ){
-                        arrayEstador.push('K');
-                    }
-                    if(arrayEstador[count]=='K'  ){
-                        arrayEstador.push('O');
-                    }
-                    if(arrayEstador[count]=='O'  ){
-                        arrayEstador.push('O');
-                    }
-
-                 break;
-
-            
-        }
-      count++;
-    }
-
-    //almacenar estado final que ha sido recorrido
-    var varTmp=arrayEstador[aux.length];
-
-    // verificar equivvalencia de estado
-    if(arrayEstador.length=aux.length){
-//estados de aceptacion
-        const aceptacion=['B','C','D','G','L','J','O','M'];
-        for(var i=0; i<aceptacion.length;i++){
-            // comparar estado final con alguno de aceptacion
-         if(varTmp==aceptacion[i]){
-            if(varTmp=='B'){
-                tipo='Operador';
-            }else if(varTmp=='C'){
-                tipo='Signo';
-            }else if(varTmp=='D'){
-                tipo='Agrupacion';
-            }else if(varTmp=='G'){
-                tipo='Numero';
-            }else if(varTmp=='L'){
-                tipo='Flotante';
-            }else if(varTmp=='J' || varTmp=='O' ||varTmp=='M' )
-            {
-                // si es identificador, verificar si es una palabra reservada
-                if(textoA=='VERDADERO' || textoA=='FALSO'){
-                tipo='Booleano';}
-                else {
-                    if (textoA=='variable' || textoA=='entero' || textoA=='decimal' ||
-                    textoA=='booleano' || textoA=='cadena' || textoA=='si' ||
-                    textoA=='sino' || textoA=='mientras' || textoA=='hacer' 
-                    ) {
-                        tipo='Palabra reservada';
-                        
-                    } else {
-                        tipo='Identificador'; 
-                    }
-                    
-                
-                }
-
-
-
-            }
-            // objeto con atributos de palabra y el tipo
-            var objeto=new Object();
-            objeto.palabra=textoA;
-            objeto.tipo=tipo;
-            // array con todos los objetos
-            arrayObjeto.push(objeto);
-            
-             break;
-         }
+for (let index = 0; index < letraTemporal.length; index++) {
+    let letratmt=detectarPalabra(letraTemporal[index]);
    
+   validador=true;
+    for (var i = 0; i < 8; i++) {
+        
+        for (var j = 0; j < 6; j++) {
+            try {
+            
+               
+                if(letratmt==Matriz[i][j][0] && validador)
+         {
+         contador++;
+          if(Matriz[i][j][3]==estadoAnterio){
+            estadoAnterio=Matriz[i][j][1];
+             tipo=Matriz[i][j][2];
+            validador=false;
+            }
+          
+         }
 
+
+            } catch (error) {
+                
+            }
+           
+        
         }
-
+    
     }
+
 
 }
+if(tipo=='Identificador'){
+//
+if(textoA=='VERDADERO' || textoA=='FALSO'){
+    tipo='Booleano';}
+    else {
+        if (textoA=='variable' || textoA=='entero' || textoA=='decimal' ||
+        textoA=='booleano' || textoA=='cadena' || textoA=='si' ||
+        textoA=='sino' || textoA=='mientras' || textoA=='hacer' 
+        ) {
+            tipo='Palabra reservada';
+            
+        }}}
+//
+
+var objeto=new Object();
+objeto.palabra=textoA;
+objeto.tipo=tipo;
+// array con todos los objetos
+arrayObjeto.push(objeto);}
+}
+
 // funcion para obtener la expresion con que se movera en el automata
 function detectarPalabra(textoTxt) {
     // Globales
     const array= ['+', '-', '*', '/', '%', '=','==','<','>','>=','<='];
     var tipoLetra="";
+ 
     var validar=true;
-    // cero
-    if(validar){
-        if(textoTxt=="0"){
-             tipoLetra="CERO";
-             validar=false;
-            
-         }
-       
- }
+  
     // para operador
-    for(var i=0; i<array.length;i++){
-        if(textoTxt==array[i]){
-            tipoLetra="OP";
-            validar=false;
-            break;
-        }
-        }
+    if (bolean) {
+        for(var i=0; i<array.length;i++){
+            if(textoTxt==array[i]){
+    
+                tipoLetra="Operador";
+             
+               
+               
+                validar=false;
+                break;
+            }
+            }
+    }
+  
     // signo
-    if(validar){
+    if(validar && bolean){
         const arraySigno= ['"', ';'];
         for(var i=0; i<arraySigno.length;i++){
+
             if(textoTxt==arraySigno[i]){
-                tipoLetra="SIG";
+                tipoLetra="Signo";
+           
                 validar=false;
                 break;
             }
         }  
     }   
     // agrupacion
-    if(validar){
+    if(validar && bolean){
         const arrayAgrupacion= ['(', ')', '{', '}'];
         for(var i=0; i<arrayAgrupacion.length;i++){
             if(textoTxt==arrayAgrupacion[i]){
-                tipoLetra="AG";
+                tipoLetra="Agrupacion";
+              
                 validar=false;
                 break;
             }
         }  
     }   
     //digito
-    if(validar){
+    if(validar && bolean){
         const arrayNumero=['1','2','3','4','5','6','7','8','9','0'];
         for(var i=0; i<arrayNumero.length;i++){
             if(textoTxt==arrayNumero[i]){
-                tipoLetra="DIG";
+                tipoLetra="Digito";
+           
+               
                 validar=false;
                 break;
             }
         }  
     }
     // punto
-    if(validar){
+    if(validar && bolean){
            if(textoTxt=="."){
-                tipoLetra="P";
+                tipoLetra="Punto";
+           
                 validar=false;
                
             }
           
     } 
     //letra
-    if(validar){
+    if(validar && bolean){
         const arrayLetra=['a','b','c','d','e','f','g','h','i',
         'j','k','l','m','n','ñ','o','p','q','r',
         's','t','u','v','w','x','y','z'];
         var tmporal=textoTxt.toLowerCase();
         for(var i=0; i<arrayLetra.length;i++){
             if(tmporal==arrayLetra[i]){
-                tipoLetra="LE";
+                tipoLetra="Letra";
                 validar=false;
                 break;
             }
